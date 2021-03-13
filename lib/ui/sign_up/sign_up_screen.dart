@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:redeinfo/ui/sign_up/widgets/sign_up_form.dart';
+import 'package:redeinfo/ui/widgets/info_logo.dart';
 
 import 'widgets/link_to_login_screen.dart';
 
@@ -10,62 +12,49 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Spacer(),
-                Expanded(
-                  flex: context.isPortrait ? 8 : 1,
-                  child: Column(
+          child: OrientationBuilder(
+            builder: (context, orientation) {
+              if (orientation == Orientation.portrait) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      Expanded(
+                        flex: 8,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            InfoLogo(),
+                            SingleChildScrollView(
+                              child: SignUpForm(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SvgPicture.asset('assets/svg/logoh.svg'),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: LinkToLoginScreen(),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: 'nome'),
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          labelText: 'email',
-                        ),
-                      ),
-                      TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: 'senha',
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        //keyboardType: TextInputType.emailAddress,
-                      ),
-                      TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: 'repita a senha',
-                          suffixIcon:
-                              Icon(Icons.visibility, color: Colors.amber),
-                        ),
-                        //keyboardType: TextInputType.emailAddress,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'CADASTRAR',
+                    children: [
+                      Flexible(flex: 3, child: InfoLogo()),
+                      SizedBox(width: 15,),
+                      Flexible(
+                        flex: 2,
+                        child: SingleChildScrollView(
+                          child: SignUpForm(),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Spacer(),
-              ],
-            ),
+                );
+              }
+            },
           ),
         ),
       ),

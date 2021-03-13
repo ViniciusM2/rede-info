@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:redeinfo/common/drawer/components/custom_drawer_header.dart';
-import 'package:redeinfo/common/drawer/components/custom_drawer_list_tile.dart';
 import 'package:redeinfo/ui/chat/chat_selection_screen.dart';
 import 'package:redeinfo/ui/dashboard/dashboard_screen.dart';
 import 'package:redeinfo/ui/feed/feed_screen.dart';
 import 'package:redeinfo/ui/groups/groups_screen.dart';
+
+import 'components/custom_drawer_header.dart';
+import 'components/custom_drawer_list_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String imageUrl =

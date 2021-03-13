@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:redeinfo/common/drawer/custom_drawer.dart';
+import 'package:redeinfo/ui/widgets/drawer/custom_drawer.dart';
 import 'package:redeinfo/ui/dashboard/widgets/treasury_card.dart';
 
 import 'widgets/next_class_card.dart';

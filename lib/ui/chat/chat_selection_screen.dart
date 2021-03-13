@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redeinfo/common/drawer/custom_drawer.dart';
+import 'package:redeinfo/ui/widgets/drawer/custom_drawer.dart';
 import 'package:redeinfo/ui/chat/widgets/group_message_tab_view.dart';
 
 import 'widgets/direct_message_tab_view.dart';

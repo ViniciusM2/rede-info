@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:redeinfo/ui/login/widgets/info_logo.dart';
+import 'package:redeinfo/ui/widgets/info_logo.dart';
 import 'package:redeinfo/ui/login/widgets/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -41,7 +40,9 @@ class LoginScreen extends StatelessWidget {
                         flex: 3,
                         child: InfoLogo(),
                       ),
-                      SizedBox(width: 15,),
+                      SizedBox(
+                        width: 15,
+                      ),
                       Flexible(
                         flex: 2,
                         child: SingleChildScrollView(
@@ -59,24 +60,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-          else {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: <Widget>[
-                      InfoLogo(),
-                      SizedBox(width: 15),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: LoginForm(),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
- */
 
 class _MyScrollBehavior extends ScrollBehavior {
   @override
