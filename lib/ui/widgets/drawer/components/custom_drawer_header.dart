@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redeinfo/controller/services/user_service.dart';
+import 'package:redeinfo/routes/app_routes.dart';
 import 'package:redeinfo/ui/login/login_screen.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
@@ -38,11 +39,7 @@ class CustomDrawerHeader extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-              );
+              Get.offAllNamed(Routes.LOGIN);
             },
             child: Text(
               'log out',

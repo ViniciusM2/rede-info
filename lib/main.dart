@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -21,11 +22,39 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-    return FutureBuilder(
-      future: _initialization,
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.hasError) {
+    if (Firebase.apps.length == 0) {
+      final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+      return FutureBuilder(
+        future: _initialization,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasError) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                body: Container(
+                  color: Colors.black,
+                  child: Column(
+                    children: [
+                      Text('Ah, não! Aconteceu um erro!'),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+
+          // Once complete, show your application
+          if (snapshot.connectionState == ConnectionState.done) {
+            print('rodou future');
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: buildTheme(),
+              home: LoginScreen(),
+              getPages: AppPages.values,
+            );
+          }
+
+          // Otherwise, show something whilst waiting for initialization to complete
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
@@ -33,40 +62,22 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
                 child: Column(
                   children: [
-                    Text('Ah, não! Aconteceu um erro!'),
+                    InfoLogo(),
+                    Text('Carregando...'),
                   ],
                 ),
               ),
             ),
           );
-        }
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: buildTheme(),
-            home: LoginScreen(),
-            getPages: AppPages.values,
-          );
-        }
-
-        // Otherwise, show something whilst waiting for initialization to complete
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            body: Container(
-              color: Colors.black,
-              child: Column(
-                children: [
-                  InfoLogo(),
-                  Text('Carregando...'),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+        },
+      );
+    }
+    print('rodou');
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: buildTheme(),
+      home: LoginScreen(),
+      getPages: AppPages.values,
     );
   }
 }
@@ -125,6 +136,6 @@ ThemeData buildTheme() {
       ),
     ),
     appBarTheme:
-        AppBarTheme(color: Colors.transparent, elevation: 0, centerTitle: true),
+        AppBarTheme(color: Color(0xFF121212), elevation: 4, centerTitle: true),
   );
 }

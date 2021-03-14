@@ -46,8 +46,6 @@ class LoginForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () async {
-            var query = await courses.doc('vinimenezez').get();
-            print(query.data());
             Get.toNamed(Routes.FEED);
           },
           child: Text(

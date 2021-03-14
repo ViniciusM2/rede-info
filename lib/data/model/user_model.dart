@@ -17,10 +17,11 @@ class UserModel {
     'profilePhoto'
   ];
 
-  UserModel.defaultValues()
+  UserModel.nobody()
       : name = '',
         isGraduateStudent = false,
-        profilePhoto = '';
+        profilePhoto =
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe18lXrsMN7qs_k3onJhOWfH1KUV5NdZMThA&usqp=CAU';
 
   UserModel.fromMap(Map<String, dynamic>? map)
       : name = map?['name'] ?? '',
