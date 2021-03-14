@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redeinfo/controller/services/user_service.dart';
 import 'package:redeinfo/ui/login/login_screen.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
-  final String imageUrl =
-      "https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=367&q=80";
-  final String name = 'Diogo Vieira';
+  final String imageUrl = Get.find<UserService>().profilePhotoUrl.isURL
+      ? Get.find<UserService>().profilePhotoUrl
+      : 'https://upload.wikimedia.org/wikipedia/commons/6/6c/Vesta-Roma.jpg';
+  final String name = Get.find<UserService>().userName;
 
   @override
   Widget build(BuildContext context) {

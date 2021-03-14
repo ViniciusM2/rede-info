@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:redeinfo/ui/dashboard/dashboard_screen.dart';
+import 'package:get/route_manager.dart';
 
+import '../../../routes/app_routes.dart';
 import 'link_to_sign_up_screen.dart';
 
 class LoginForm extends StatelessWidget {
+  final CollectionReference courses =
+      FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,12 +45,10 @@ class LoginForm extends StatelessWidget {
           height: 15,
         ),
         ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => DashboardScreen(),
-              ),
-            );
+          onPressed: () async {
+            var query = await courses.doc('vinimenezez').get();
+            print(query.data());
+            Get.toNamed(Routes.FEED);
           },
           child: Text(
             'ENTRAR',

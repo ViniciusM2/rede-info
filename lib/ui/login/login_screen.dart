@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:redeinfo/controller/services/user_service.dart';
+import 'package:redeinfo/data/provider/user_provider.dart';
+import 'package:redeinfo/data/repository/user_repository.dart';
 import 'package:redeinfo/ui/widgets/info_logo.dart';
 import 'package:redeinfo/ui/login/widgets/login_form.dart';
 import 'package:get/get.dart';
@@ -10,6 +13,13 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(
+      UserService(
+        repository: UserRepository(
+          userProvider: UserProvider(),
+        ),
+      ),
+    );
     return Scaffold(
       body: SafeArea(
         child: ScrollConfiguration(

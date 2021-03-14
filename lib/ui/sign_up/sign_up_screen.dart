@@ -3,6 +3,8 @@ import 'package:redeinfo/ui/sign_up/widgets/sign_up_form.dart';
 import 'package:redeinfo/ui/widgets/info_logo.dart';
 import 'package:get/get.dart';
 
+
+
 class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

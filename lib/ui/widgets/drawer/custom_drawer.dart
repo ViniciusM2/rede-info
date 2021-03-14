@@ -8,10 +8,6 @@ import 'components/custom_drawer_header.dart';
 import 'components/custom_drawer_list_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
-  final String imageUrl =
-      "https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=367&q=80";
-  final String name = 'Paulo Vieira';
-
   @override
   Widget build(BuildContext context) {
     return Drawer(

@@ -1,7 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:redeinfo/ui/login/login_screen.dart';
 import 'package:flutter/services.dart';
+
+import 'routes/app_pages.dart';
+import 'ui/login/login_screen.dart';
+import 'ui/widgets/info_logo.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,15 +15,58 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Garante que apenas a orientação retrato exista na aplicação
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: buildTheme(),
-      home: LoginScreen(),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+    return FutureBuilder(
+      future: _initialization,
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.hasError) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(
+              body: Container(
+                color: Colors.black,
+                child: Column(
+                  children: [
+                    Text('Ah, não! Aconteceu um erro!'),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: buildTheme(),
+            home: LoginScreen(),
+            getPages: AppPages.values,
+          );
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: Container(
+              color: Colors.black,
+              child: Column(
+                children: [
+                  InfoLogo(),
+                  Text('Carregando...'),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
