@@ -42,7 +42,9 @@ class _OneColumnVerticalLayout extends StatelessWidget {
             ...(controller.feedModel.value?.posts
                     .map((element) => Padding(
                           padding: const EdgeInsets.only(bottom: 12),
-                          child: FeedCard.fromPostModel(post: element),
+                          child: AspectRatio(
+                              aspectRatio: 1,
+                              child: FeedCard.fromPostModel(post: element)),
                         ))
                     .toList() ??
                 [])

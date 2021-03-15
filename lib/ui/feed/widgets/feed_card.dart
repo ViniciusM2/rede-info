@@ -9,7 +9,6 @@ class FeedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height * .4,
       child: Card(
         child: Column(
           children: [
@@ -22,8 +21,7 @@ class FeedCard extends StatelessWidget {
               title: Text(
                   '${post.authorName} - há ${_getTimeAgoOfAPost(post: post)}',
                   style: Get.textTheme!.overline),
-              subtitle:
-                  Text('${post.title}', style: Get.textTheme!.headline6),
+              subtitle: Text('${post.title}', style: Get.textTheme!.headline6),
             ),
             Expanded(
                 child: Container(
@@ -52,6 +50,6 @@ class FeedCard extends StatelessWidget {
     if (interval.inHours > 1) return '${interval.inHours} h';
     if (interval.inMinutes > 1) return '${interval.inMinutes} min';
     if (interval.inSeconds > 15) return '${interval.inMinutes} s';
-    return('Agora');
+    return ('Agora');
   }
 }
