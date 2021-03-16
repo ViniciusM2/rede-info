@@ -14,9 +14,11 @@ class FeedCard extends StatelessWidget {
           children: [
             ListTile(
               trailing: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  Get.find<UserService>().profilePhotoUrl,
-                ),
+                backgroundImage: GetPlatform.isWeb
+                    ? null
+                    : NetworkImage(
+                        Get.find<UserService>().profilePhotoUrl,
+                      ),
               ),
               title: Text(
                   '${post.authorName} - há ${_getTimeAgoOfAPost(post: post)}',
@@ -46,7 +48,7 @@ class FeedCard extends StatelessWidget {
     var interval = Duration(
         milliseconds: DateTime.now().millisecondsSinceEpoch -
             post.dateTime.millisecondsSinceEpoch);
-    if (interval.inDays > 1) return '${interval.inDays} dias';
+    if (interval.inDays >= 1) return '${interval.inDays} d';
     if (interval.inHours > 1) return '${interval.inHours} h';
     if (interval.inMinutes > 1) return '${interval.inMinutes} min';
     if (interval.inSeconds > 15) return '${interval.inMinutes} s';

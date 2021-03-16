@@ -5,10 +5,7 @@ import 'package:redeinfo/routes/app_routes.dart';
 import 'package:redeinfo/ui/login/login_screen.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
-  final String imageUrl = Get.find<UserService>().profilePhotoUrl.isURL
-      ? Get.find<UserService>().profilePhotoUrl
-      : 'https://upload.wikimedia.org/wikipedia/commons/6/6c/Vesta-Roma.jpg';
-  final String name = Get.find<UserService>().userName;
+  final controller = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +13,30 @@ class CustomDrawerHeader extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 80,
-            width: 80,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(imageUrl),
-              ),
-            ),
-          ),
+          Obx(() => Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                  image: controller.profilePhotoUrl.isNotEmpty && !GetPlatform.isWeb
+                      ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(controller.profilePhotoUrl),
+                        )
+                      : null,
+                ),
+              )),
           SizedBox(
             height: 7,
           ),
-          Text(
-            name,
-            style: Theme.of(context).textTheme.headline6,
-          ),
+          Obx(() => Text(
+                controller.userName,
+                style: Theme.of(context).textTheme.headline6,
+                maxLines: 1,
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.center,
+              )),
           SizedBox(
             height: 2,
           ),
